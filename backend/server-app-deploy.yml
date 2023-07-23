@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flipcart-server-app
+spec:
+  selector:
+    matchLabels:
+      app: flipcart-server
+  template:
+    metadata:
+      labels:
+        app: flipcart-server
+    spec:
+      containers:
+      - name: flipcart-server-app
+        image: flipcart-server-app-image
+        envFrom:
+          - name: flipcart-server-config
+          - name: flipcart-server-secret
+
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5000

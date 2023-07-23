@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flipcart-server-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mongo-db
+  template:
+    metadata:
+      labels:
+        app: mongo-db
+    spec:
+      containers:
+      - name: mongo-db
+        image: mongo:latest
+        envFrom:
+          - name: flipcart-server-db
+        volumeMounts:
+          - name: mydb
+            mountPath: /tmp/mongo-pv
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 27017
+      volumes:
+        - name: mydb
+          persistentVolumeClaim:
+            claimName: myawsebsvolclaim

@@ -1,0 +1,33 @@
+# Login to aws console and create "ubuntu" ec2 instance with (2 CPU, 4 GB RAM)
+
+# Switch to root user
+    --> sudo sudo
+
+# Update system
+    --> sudo apt update
+
+# Install git
+    --> apt-get install git
+# Install docker
+    --> apt -y install docker.io
+
+# Install Kubectl now with the given link
+    --> curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x ./kubectl && sudo mv ./kubectl /usr/local/bin/kubectl
+
+# Install Minikube with the given link
+    --> curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 && chmod +x minikube && sudo mv minikube /usr/local/bin/
+
+# Install support driver for minikube
+    --> apt install conntrack
+
+# Start/Run minikube
+    --> minikube start --vm-driver=none
+
+# Check status of minikube
+    --> minikube status
+
+# Check Kubernet version
+    --> kubectl version
+
+# Check nodes
+    --> kubectl get nodes
